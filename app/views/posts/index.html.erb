@@ -1,6 +1,31 @@
-<h1>Blog Posts</h1>
+<div class="container">
+  <header>
+    <div class="container">
+      <h1>My Blog</h1>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-<% @posts.each do |post| %>
-  <h2><%= link_to post.title, "/posts/#{post.id}" %></h2>
-  <p><%= post.body %></p>
-<% end %>
+  <main>
+    <% @posts.each do |post| %>
+      <article class="post">
+        <h2><%= link_to post.title, "/posts/#{post.id}" %></h2>
+        <div class="post-meta">
+          <span><%= post.created_at.strftime("%B %d, %Y") %></span>
+        </div>
+        <div class="post-content">
+          <p><%= post.body %></p>
+        </div>
+        <%= link_to "Read More", "/posts/#{post.id}", class: "btn" %>
+      </article>
+    <% end %>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 My Blog. All rights reserved.</p>
+  </footer>
+</div>
