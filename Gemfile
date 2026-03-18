@@ -26,6 +26,17 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# Use mysql2 as the database for Active Record
+gem "mysql2"
+
+# gem "action_policy"
+gem "action_policy"
+
+# gem "devise"
+gem "devise"
+
+
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
