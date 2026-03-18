@@ -10,8 +10,8 @@
 
   <main>
     <article class="post">
-      <h1 style="margin-bottom: 2rem;">Edit Post</h1>
-      <%= form_with model: @post, url: "/posts/#{@post.id}", method: :patch do |form| %>
+      <h1 style="margin-bottom: 2rem;">New Post</h1>
+      <%= form_with model: @post, url: '/posts' do |form| %>
         <div class="field" style="margin-bottom: 1.5rem;">
             <%= form.label :title, style: "display: block; font-weight: 600; margin-bottom: 0.5rem;" %>
             <%= form.text_field :title, class: "form-control" %>
@@ -21,8 +21,8 @@
             <%= form.text_area :body, rows: 6, class: "form-control" %>
         </div>
         <div class="actions" style="margin-top: 2rem;">
-            <%= form.submit "Update Post", class: "btn" %>
-            <%= link_to "Cancel", "/posts/#{@post.id}", class: "btn", style: "background: var(--text-muted); margin-left: 0.5rem;" %>
+            <%= form.submit "Create Post", class: "btn" %>
+            <%= link_to "Cancel", root_path, class: "btn", style: "background: var(--text-muted); margin-left: 0.5rem;" %>
         </div>
       <% end %>
     </article>

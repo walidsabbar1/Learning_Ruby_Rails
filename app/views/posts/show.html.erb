@@ -19,7 +19,11 @@
       <div class="post-content">
         <p><%= @post.body %></p>
       </div>
-      <%= link_to "Back to posts", root_path, class: "btn" %>
+      <div style="margin-top: 2rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <%= link_to "Back to posts", root_path, class: "btn" %>
+        <%= link_to "Edit", "/posts/#{@post.id}/edit", class: "btn", style: "background: var(--text-muted);" %>
+        <%= link_to "Delete", "/posts/#{@post.id}", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn", style: "background: #ef4444;" %>
+      </div>
     </article>
   </main>
 
