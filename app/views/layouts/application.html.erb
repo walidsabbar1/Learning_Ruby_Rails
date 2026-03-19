@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MyApp</title>
+    <title>My Blog</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,17 +11,29 @@
   </head>
 
   <body>
-    
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <% if user_signed_in? %>
-      Signed in as: <%= current_user.email %><br>
-      <%= link_to "Edit Profile", edit_user_registration_path %> | 
-      <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete } %>
-    <% else %>
-      <%= link_to "Sign Up", new_user_registration_path %> | 
-      <%= link_to "Login", new_user_session_path %>
+    <% if notice.present? %>
+      <div style="background: #10b981; color: white; text-align: center; padding: 0.75rem; font-weight: 600;"><%= notice %></div>
     <% end %>
+    <% if alert.present? %>
+      <div style="background: #ef4444; color: white; text-align: center; padding: 0.75rem; font-weight: 600;"><%= alert %></div>
+    <% end %>
+
+    <header style="border-radius: 0; margin-bottom: 2rem; padding: 1rem 2rem;">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; max-width: 1000px; padding: 0;">
+        <h1><a href="/" style="text-decoration: none; color: inherit; -webkit-text-fill-color: inherit;">My Blog</a></h1>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <% if user_signed_in? %>
+            <span style="color: var(--text-muted); font-weight: 600; margin-right: 0.5rem;"><%= current_user.email %></span>
+            <%= link_to "Edit Profile", edit_user_registration_path, class: "btn", style: "background: var(--text-muted); padding: 0.5rem 1rem;" %>
+            <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn", style: "background: #ef4444; padding: 0.5rem 1rem;" %>
+          <% else %>
+            <%= link_to "Login", new_user_session_path, style: "color: var(--text-main); font-weight: 600;" %>
+            <%= link_to "Create your blog", new_user_registration_path, class: "btn", style: "padding: 0.5rem 1rem;" %>
+          <% end %>
+        </div>
+      </div>
+    </header>
+
     <%= yield %>
   </body>
 </html>
