@@ -5,8 +5,6 @@ class PostsController < ApplicationController
       @posts = BlogPost.all.order(created_at: :desc)
     end
     def show
-        rescue ActiveRecord::RecordNotFound 
-        redirect_to root_path
     end
     def new
         @post = BlogPost.new
@@ -43,6 +41,8 @@ class PostsController < ApplicationController
 
     def set_post
         @post = BlogPost.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+        redirect_to root_path
     end
 end
  
