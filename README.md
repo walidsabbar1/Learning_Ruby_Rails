@@ -23,26 +23,34 @@ This project provides a beautiful, responsive user interface for displaying and 
 Follow these steps to get the application up and running locally:
 
 ### 1. Install dependencies
+
 Ensure you have Ruby, Bundler, and appropriate MySQL development headers installed, then run:
+
 ```bash
 bundle install
 ```
 
 ### 2. Setup the database
+
 Create the database (typically `my_app_development`) and run the migrations:
+
 ```bash
 bin/rails db:create
 bin/rails db:migrate
 ```
-*(Optional)* If you have seed data defined in `db/seeds.rb`, you can initialize your database with:
+
+_(Optional)_ If you have seed data defined in `db/seeds.rb`, you can initialize your database with:
+
 ```bash
 bin/rails db:seed
 ```
 
 ### 3. Start the Rails server
+
 ```bash
 bin/rails server
 ```
+
 Or simply use `rails s`.
 
 By default, the application will be accessible at [http://localhost:3000](http://localhost:3000).
