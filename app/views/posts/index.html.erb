@@ -11,7 +11,7 @@
   </header>
 
   <div style="margin-bottom: 2rem; display: flex; justify-content: flex-end;">
-    <%= link_to "New Post", "/posts/new", class: "btn" %>
+    <%= link_to "New Post", "/posts/new", class: "btn" if user_signed_in? %>
   </div>
 
   <main>
@@ -26,8 +26,8 @@
         </div>
         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
           <%= link_to "Read More", "/posts/#{post.id}", class: "btn" %>
-          <%= link_to "Edit", "/posts/#{post.id}/edit", class: "btn", style: "background: var(--text-muted);" %>
-          <%= link_to "Delete", "/posts/#{post.id}", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn", style: "background: #ef4444;" %>
+          <%= link_to "Edit", "/posts/#{post.id}/edit", class: "btn", style: "background: var(--text-muted);" if user_signed_in? %>
+          <%= link_to "Delete", "/posts/#{post.id}", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn", style: "background: #ef4444;" if user_signed_in? %>
         </div>
       </article>
     <% end %>

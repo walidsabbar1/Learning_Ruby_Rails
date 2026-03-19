@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
+    before_action :authenticate_user!, except: [:index, :show]
+    before_action :set_post, only: [:show, :edit, :update, :destroy]
     def index
       @posts = BlogPost.all.order(created_at: :desc)
     end
     def show
-        @post = BlogPost.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
+        rescue ActiveRecord::RecordNotFound 
         redirect_to root_path
     end
     def new
@@ -20,11 +21,9 @@ class PostsController < ApplicationController
     end
 
     def edit
-        @post = BlogPost.find(params[:id])
     end
 
     def update
-        @post = BlogPost.find(params[:id])
         if @post.update(post_params)
             redirect_to "/posts/#{@post.id}"
         else
@@ -33,7 +32,6 @@ class PostsController < ApplicationController
     end
 
     def destroy
-        @post = BlogPost.find(params[:id])
         @post.destroy
         redirect_to root_path
     end
@@ -41,6 +39,10 @@ class PostsController < ApplicationController
     private
     def post_params
         params.require(:blog_post).permit(:title, :body)
+    end
+
+    def set_post
+        @post = BlogPost.find(params[:id])
     end
 end
  

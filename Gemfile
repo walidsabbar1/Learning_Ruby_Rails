@@ -33,7 +33,7 @@ gem "mysql2"
 gem "action_policy"
 
 # gem "devise"
-gem "devise"
+gem "devise", "~> 4.9"
 
 
 
