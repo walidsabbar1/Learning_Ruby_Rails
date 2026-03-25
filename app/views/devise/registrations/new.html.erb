@@ -6,8 +6,13 @@
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field" style="margin-bottom: 1.5rem;">
+        <%= f.label :username, style: "display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-main);" %>
+        <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "Choose a display name" %>
+      </div>
+
+      <div class="field" style="margin-bottom: 1.5rem;">
         <%= f.label :email, style: "display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-main);" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, autocomplete: "email" %>
       </div>
 
       <div class="field" style="margin-bottom: 1.5rem;">

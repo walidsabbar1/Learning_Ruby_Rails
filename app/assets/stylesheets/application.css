@@ -110,6 +110,7 @@ nav a:hover {
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
   transition: var(--transition);
+  position: relative;
 }
 
 .post:hover {
@@ -205,4 +206,104 @@ footer {
   font-size: 0.875rem;
   margin-top: 4rem;
   border-top: 1px solid var(--border-color);
+}
+
+/* Status Badges */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.badge.draft { background: #e2e8f0; color: #475569; }
+.badge.scheduled { background: #fef9c3; color: #854d0e; }
+.badge.published { background: #dcfce7; color: #166534; }
+
+.avatar-small {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+/* Dropdown Menu */
+.dropdown {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: inline-block;
+}
+
+.dropbtn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  padding: 0 0 8px 0;
+  line-height: 1;
+}
+
+.dropbtn:hover {
+  background-color: var(--bg-color);
+  color: var(--primary);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #ffffff;
+  min-width: 140px;
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.dropdown-content a, .dropdown-content form {
+  width: 100%;
+}
+
+.dropdown-content a, .dropdown-content button {
+  color: var(--text-main);
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.dropdown.show .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a:hover, .dropdown-content button:hover {
+  background-color: var(--bg-color);
+  color: var(--primary);
+}
+
+.dropdown-content .delete-btn {
+  color: #ef4444 !important;
+}
+
+.dropdown-content .delete-btn:hover {
+  background-color: #fef2f2 !important;
 }

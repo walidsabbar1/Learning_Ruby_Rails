@@ -1,33 +1,47 @@
 <div class="container">
-  <header>
-    <div class="container">
-      <h1>My Blog</h1>
-      <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-      </nav>
-    </div>
-  </header>
 
   <main>
     <article class="post">
+      <% if user_signed_in? && (allowed_to?(:edit?, @post) || allowed_to?(:destroy?, @post)) %>
+        <div class="dropdown">
+          <button class="dropbtn">...</button>
+          <div class="dropdown-content">
+            <% if allowed_to?(:edit?, @post) %>
+              <%= link_to "Edit Post", "/posts/#{@post.id}/edit" %>
+            <% end %>
+            <% if allowed_to?(:destroy?, @post) %>
+              <%= button_to "Delete Post", "/posts/#{@post.id}", method: :delete, data: { confirm: 'Are you sure?' }, class: "delete-btn" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
       <h1><%= @post.title %></h1>
-      <div class="post-meta">
-        <span><%= @post.created_at.strftime("%B %d, %Y") %></span>
+      <div class="post-meta" style="display: flex; align-items: center; gap: 1rem;">
+        <% if @post.user.present? %>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <img src="https://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(@post.user.email.downcase) %>?s=40&d=mp" alt="Avatar" class="avatar-small">
+            <span style="font-weight: 600; color: var(--text-main);"><%= (@post.user.username.presence || @post.user.email.split('@').first).capitalize %></span>
+          </div>
+        <% end %>
+        <span><%= @post.published_at? ? @post.published_at.strftime("%B %d, %Y %I:%M %p") : "Draft" %></span>
+        <% if user_signed_in? && allowed_to?(:edit?, @post) %>
+          <% if @post.draft? %>
+            <span class="badge draft">Draft</span>
+          <% elsif @post.scheduled? %>
+            <span class="badge scheduled">Scheduled</span>
+          <% else %>
+            <span class="badge published">Published</span>
+          <% end %>
+        <% end %>
       </div>
       <div class="post-content">
         <p><%= @post.body %></p>
       </div>
       <div style="margin-top: 2rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
         <%= link_to "Back to posts", root_path, class: "btn" %>
-        <%= link_to "Edit", "/posts/#{@post.id}/edit", class: "btn", style: "background: var(--text-muted);" %>
-        <%= link_to "Delete", "/posts/#{@post.id}", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn", style: "background: #ef4444;" %>
       </div>
     </article>
   </main>
 
-  <footer>
-    <p>&copy; 2026 My Blog. All rights reserved.</p>
-  </footer>
 </div>

@@ -1,17 +1,20 @@
 <div class="container">
-  <header>
-    <div class="container" style="padding: 0;">
-      <h1>My Blog</h1>
-      <nav>
-        <a href="/">Home</a>
-      </nav>
-    </div>
-  </header>
 
   <main>
     <article class="post">
       <h1 style="margin-bottom: 2rem;">New Post</h1>
       <%= form_with model: @post, url: '/posts' do |form| %>
+        <% if @post.errors.any? %>
+          <div style="background: #fef2f2; color: #991b1b; padding: 1.5rem; border-radius: 8px; border: 1px solid #fca5a5; margin-bottom: 2rem;">
+            <h3 style="margin-top: 0; font-size: 1rem; font-weight: 700;">Could not save post:</h3>
+            <ul style="margin: 0.5rem 0 0 0; padding-left: 1.5rem; font-size: 0.875rem;">
+              <% @post.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
         <div class="field" style="margin-bottom: 1.5rem;">
             <%= form.label :title, style: "display: block; font-weight: 600; margin-bottom: 0.5rem;" %>
             <%= form.text_field :title, class: "form-control" %>
@@ -20,15 +23,25 @@
             <%= form.label :body, style: "display: block; font-weight: 600; margin-bottom: 0.5rem;" %>
             <%= form.text_area :body, rows: 6, class: "form-control" %>
         </div>
-        <div class="actions" style="margin-top: 2rem;">
-            <%= form.submit "Create Post", class: "btn" %>
-            <%= link_to "Cancel", root_path, class: "btn", style: "background: var(--text-muted); margin-left: 0.5rem;" %>
+
+        <div class="field" style="margin-top: 2rem; padding: 1.5rem; background: #fdfdfd; border: 1px dashed var(--border-color); border-radius: 8px;">
+            <h3 style="font-size: 1rem; margin-bottom: 1rem; color: var(--primary);">Publishing Options</h3>
+            <%= form.label :published_at, "Schedule for a future date (optional)", style: "display: block; font-weight: 600; margin-bottom: 0.5rem;" %>
+            <%= form.datetime_field :published_at, class: "form-control" %>
+            <div style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
+              <p>• <strong>Leave blank</strong> to save as a draft.</p>
+              <p>• <strong>Choose a future date</strong> to schedule for later.</p>
+              <p>• Use the <strong>"Publish Now"</strong> button below to go live immediately.</p>
+            </div>
+        </div>
+
+        <div class="actions" style="margin-top: 2rem; display: flex; gap: 0.75rem;">
+            <%= form.submit "Publish Now", class: "btn" %>
+            <%= form.submit "Save as Draft", class: "btn", style: "background: var(--text-muted);" %>
+            <%= link_to "Cancel", root_path, class: "btn", style: "background: #f1f5f9; color: #64748b;" %>
         </div>
       <% end %>
     </article>
   </main>
 
-  <footer>
-    <p>&copy; 2026 My Blog. All rights reserved.</p>
-  </footer>
 </div>
